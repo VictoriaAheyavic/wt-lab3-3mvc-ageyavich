@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using wt_lab3_3mvc_ageyavich.Models;
+
+namespace wt_lab3_3mvc_ageyavich.Views
+{
+    public class ProductView
+    {
+        /// <summary>
+        /// Показать список товаров.
+        /// </summary>
+        public void ShowProducts(List<Product> products)
+        {
+            Console.WriteLine("=== СПИСОК ТОВАРОВ ===");
+
+            if (products == null || products.Count == 0)
+            {
+                Console.WriteLine("  (список пуст)");
+                return;
+            }
+
+            foreach (var p in products)
+            {
+                Console.WriteLine(
+                    $"{p.Id}. {p.Name} | {p.Category} | {p.Price} руб. | " +
+                    $"{(p.IsAvailable ? "доступен" : "недоступен")}"
+                );
+            }
+        }
+
+        /// <summary>
+        /// Показать один товар.
+        /// </summary>
+        public void ShowProduct(Product product)
+        {
+            if (product == null)
+            {
+                ShowMessage("Товар не найден.");
+                return;
+            }
+
+            Console.WriteLine("=== ТОВАР ===");
+            Console.WriteLine($"ID:          {product.Id}");
+            Console.WriteLine($"Название:    {product.Name}");
+            Console.WriteLine($"Категория:   {product.Category}");
+            Console.WriteLine($"Цена:        {product.Price} руб.");
+            Console.WriteLine($"Остаток:     {product.Stock} шт.");
+            Console.WriteLine($"Доступен:    {(product.IsAvailable ? "да" : "нет")}");
+            Console.WriteLine($"Описание:    {product.Description}");
+        }
+
+        /// <summary>
+        /// Показать сообщение пользователю.
+        /// </summary>
+        public void ShowMessage(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        /// <summary>
+        /// Показать заголовок раздела.
+        /// </summary>
+        public void ShowHeader(string title)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"=== {title} ===");
+        }
+
+        /// <summary>
+        /// Показать статистику.
+        /// </summary>
+        public void ShowStatistics(int total, int available, decimal totalSum,
+                                   decimal avg, decimal max, decimal min)
+        {
+            Console.WriteLine("=== СТАТИСТИКА ПО ТОВАРАМ ===");
+            Console.WriteLine($"Всего товаров:          {total}");
+            Console.WriteLine($"Доступных:              {available}");
+            Console.WriteLine($"Общая стоимость склада: {totalSum} руб.");
+            Console.WriteLine($"Средняя цена:           {avg} руб.");
+            Console.WriteLine($"Максимальная цена:      {max} руб.");
+            Console.WriteLine($"Минимальная цена:       {min} руб.");
+        }
+    }
+}
